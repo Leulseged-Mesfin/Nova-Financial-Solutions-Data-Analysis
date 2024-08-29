@@ -32,10 +32,15 @@ def publication_dates(df):
     # Analyze weekday distribution
     weekday_counts = df['date'].dt.day_name().value_counts()
     
+    # # Monthly trend
+    # df['month_start'] = df['date'].dt.floor('D') + MonthEnd(0) - MonthEnd(1)
+    # #monthly_counts = df.groupby('month_start').size()
+    # monthly_counts = df.groupby(pd.Grouper(key='date', freq='M')).size()
+
     # Monthly trend
     df['month_start'] = df['date'].dt.floor('D') + MonthEnd(0) - MonthEnd(1)
     #monthly_counts = df.groupby('month_start').size()
-    monthly_counts = df.groupby(pd.Grouper(key='date', freq='M')).size()
+    monthly_counts = df.groupby(df['date'].dt.to_period('M').dt.to_timestamp()).size()
 
     
     return {
