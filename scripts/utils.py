@@ -4,6 +4,7 @@ from pandas.tseries.offsets import MonthEnd
 import matplotlib.pyplot as plt
 import  matplotlib.dates as mdates
 import  matplotlib.dates as mdates
+import TextBlob
 
 
 def plot_top_publishers(df):
@@ -89,3 +90,23 @@ def plot_publication_trends(date_analysis):
     
     plt.tight_layout()
     return fig
+
+
+def get_sentiment(text):
+    blob = TextBlob(text)
+    return blob.sentiment.polarity
+
+
+def categorize_sentiment(value):
+    if value > 0:
+        return 'positive'
+    elif value < 0:
+        return 'negative'
+    else:
+        return 'neutral'
+    
+
+
+def get_subjectivity(text):
+    blob = TextBlob(text)
+    return blob.sentiment.subjectivity
