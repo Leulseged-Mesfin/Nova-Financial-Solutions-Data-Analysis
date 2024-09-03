@@ -14,10 +14,8 @@ from textblob import TextBlob
 from collections import Counter
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
-
-
-
-
+import talib as tl
+import yfinance as yf
 
 def plot_top_publishers(df):
     # Get the top 10 publishers
@@ -233,3 +231,7 @@ def get_top_publisher_domains(df, publisher_column='publisher', top_n=10):
 
     # Return the top N publisher domains
     return domain_counts.head(top_n)
+
+
+# Task 2
+
